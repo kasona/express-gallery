@@ -1,0 +1,22 @@
+{
+  "name": "express-gallery",
+  "version": "0.0.0",
+  "homepage": "https://github.com/kasona/express-gallery",
+  "authors": [
+    "kasi <kasionaga@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "~5.5.3"
+  }
+}
