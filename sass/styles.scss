@@ -83,31 +83,34 @@ h1 {
     margin-bottom: 30px;
     margin-top: 15px;
   }
+  #top-image {
+    padding-bottom: 30px;
+
+    @media #{$small} {
+       border-bottom: 1px dashed #C7C7C7;
+    }
+  }
 
 }
-#top-image {
-  padding-bottom: 30px;
+#photoContainer {
 
-  @media #{$small} {
-     border-bottom: 1px dashed #C7C7C7;
-  }
-}
-#bottom-image {
-  padding-bottom: 30px;
-  padding-top: 30px;
-  border-top: 1px dashed #C7C7C7;
-  border-bottom: 1px dashed #C7C7C7;
+  #bottom-image {
+    padding-bottom: 30px;
+    padding-top: 30px;
+    border-top: 1px dashed #C7C7C7;
+    border-bottom: 1px dashed #C7C7C7;
 
-  @media #{$small} {
-    border-bottom: none;
-    border-top: none;
+    @media #{$small} {
+      border-bottom: none;
+      border-top: none;
+    }
   }
+
 }
 
 //background-cover??? from Reddit
 
-// =============== Home Detail mobile ===============
-
+// =========== Desktop Detail =========================
 #photoContainerDetail {
   @media #{$small}{
     display:none;
@@ -116,4 +119,10 @@ h1 {
   @media #{$large}{
     display: block;
   }
+
+  .side-pics {
+    margin-bottom: 15px;
+  }
+
+
 }

@@ -1277,32 +1277,36 @@ h1 {
     margin-bottom: 30px;
     margin-top: 15px; } }
 
-/* line 88, stdin */
-#top-image {
+/* line 86, stdin */
+#container #top-image {
   padding-bottom: 30px; }
   @media only screen {
-    /* line 88, stdin */
-    #top-image {
+    /* line 86, stdin */
+    #container #top-image {
       border-bottom: 1px dashed #C7C7C7; } }
 
-/* line 95, stdin */
-#bottom-image {
+/* line 97, stdin */
+#photoContainer #bottom-image {
   padding-bottom: 30px;
   padding-top: 30px;
   border-top: 1px dashed #C7C7C7;
   border-bottom: 1px dashed #C7C7C7; }
   @media only screen {
-    /* line 95, stdin */
-    #bottom-image {
+    /* line 97, stdin */
+    #photoContainer #bottom-image {
       border-bottom: none;
       border-top: none; } }
 
 @media only screen {
-  /* line 111, stdin */
+  /* line 114, stdin */
   #photoContainerDetail {
     display: none; } }
 
 @media only screen and (min-width: 64.0625em) {
-  /* line 111, stdin */
+  /* line 114, stdin */
   #photoContainerDetail {
     display: block; } }
+
+/* line 123, stdin */
+#photoContainerDetail .side-pics {
+  margin-bottom: 15px; }

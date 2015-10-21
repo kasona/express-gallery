@@ -1,10 +1,9 @@
   //- Home Listing Mixins
 mixin generateMainPhoto(mainPhoto)
   #container
-    each photo in mainPhoto
       .large-12.columns#top-image
+        img(src= photos[Math.floor(Math.random()*3)].image)
         a(href='/gallery/:id')
-          img(src= photo.image)
 
 //- photo is like i
 mixin generatePhotos(photos)
@@ -12,25 +11,24 @@ mixin generatePhotos(photos)
     each photo in photos
       .large-4.columns#bottom-image
         a(href='/gallery/:id')
-          img(src= photo.image)
-        p= photo.title
+          img(src= photos[Math.floor(Math.random()*3)].image)
+        a(href='/gallery/:id')
+          img(src= photos[Math.floor(Math.random()*3)].image)
+        a(href='/gallery/:id')
+          img(src= photos[Math.floor(Math.random()*3)].image)
 
 //- Home Detail Mixins
 mixin generateMainPhotoInDetail(mainPhoto)
   #containerDetail
-    for photo in mainPhoto
-      .large-8.columns#main-img
-        p= photo.title
-        a(href='/gallery/:id') www.pexels.com
-        img(src= photo.image)
-        p= photo.description
-        p= photo.copyright
+    .large-8.columns.main-img
+      img(src='#{mainPhoto.image}')
+      a(href='/gallery/:id') www.pexels.com
 
 mixin generatePhotosInDetail(photos)
   #photoContainerDetail
     each photo in photos
-      .large-4.columns#side-img
+      .large-4.columns.side-img
         a(href='/gallery/:id')
-          img(src= photo.image)
-        p= photo.title
-        p= photo.link
+        img(src='#{photo.image}')
+        p #{photo.title} #{photo.copyright}
+
