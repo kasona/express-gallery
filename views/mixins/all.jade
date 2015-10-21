@@ -2,20 +2,16 @@
 mixin generateMainPhoto(mainPhoto)
   #container
       .large-12.columns#top-image
-        img(src= photos[Math.floor(Math.random()*3)].image)
-        a(href='/gallery/:id')
+      img(src='#{mainPhoto.image}')
+      a(href='/gallery/:id') www.pexels.com
 
 //- photo is like i
 mixin generatePhotos(photos)
-  #photoContainer
-    each photo in photos
-      .large-4.columns#bottom-image
+  each photo, index in photos
+      .large-4.columns.side-img
         a(href='/gallery/:id')
-          img(src= photos[Math.floor(Math.random()*3)].image)
-        a(href='/gallery/:id')
-          img(src= photos[Math.floor(Math.random()*3)].image)
-        a(href='/gallery/:id')
-          img(src= photos[Math.floor(Math.random()*3)].image)
+        img(src='#{photo.image}')
+        p #{photo.title} #{photo.copyright}
 
 //- Home Detail Mixins
 mixin generateMainPhotoInDetail(mainPhoto)
@@ -27,7 +23,7 @@ mixin generateMainPhotoInDetail(mainPhoto)
 mixin generatePhotosInDetail(photos)
   #photoContainerDetail
     each photo in photos
-      .large-4.columns.side-img
+      .large-4.columns.side-img-detail
         a(href='/gallery/:id')
         img(src='#{photo.image}')
         p #{photo.title} #{photo.copyright}

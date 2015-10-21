@@ -1307,6 +1307,7 @@ h1 {
   #photoContainerDetail {
     display: block; } }
 
-/* line 123, stdin */
-#photoContainerDetail .side-pics {
-  margin-bottom: 15px; }
+/* line 126, stdin */
+.side-img-detail {
+  margin-bottom: 15px;
+  display: block; }

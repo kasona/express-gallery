@@ -3,8 +3,10 @@ var router = express.Router();
 
 // ================== Home Route ====================
 router.get('/', function (req, res) {
+  var allPhotos = require('./../allPhotos')();
   res.render('home-listing', {
-    photos : allPhotos.photos
+    'mainPhoto' : allPhotos.pop(),
+    'photos' : allPhotos
   });
 });
 

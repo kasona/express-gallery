@@ -3,5 +3,9 @@ extends ./layouts/mainLayout
 include ./mixins/all
 
 block home-listing
-  +generateMainPhoto(mainPhoto)
-  +generatePhotos(photos)
+  .row
+    .large-12.columns
+      +generateMainPhoto(mainPhoto)
+    .large-12.columns
+      +generatePhotos(photos)
+      +generatePhotos(photos)
