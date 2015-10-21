@@ -1,0 +1,36 @@
+  //- Home Listing Mixins
+mixin generateMainPhoto(mainPhoto)
+  #container
+    each photo in mainPhoto
+      .large-12.columns#top-image
+        a(href='/gallery/:id')
+          img(src= photo.image)
+
+//- photo is like i
+mixin generatePhotos(photos)
+  #photoContainer
+    each photo in photos
+      .large-4.columns#bottom-image
+        a(href='/gallery/:id')
+          img(src= photo.image)
+        p= photo.title
+
+//- Home Detail Mixins
+mixin generateMainPhotoInDetail(mainPhoto)
+  #containerDetail
+    for photo in mainPhoto
+      .large-8.columns#main-img
+        p= photo.title
+        a(href='/gallery/:id') www.pexels.com
+        img(src= photo.image)
+        p= photo.description
+        p= photo.copyright
+
+mixin generatePhotosInDetail(photos)
+  #photoContainerDetail
+    each photo in photos
+      .large-4.columns#side-img
+        a(href='/gallery/:id')
+          img(src= photo.image)
+        p= photo.title
+        p= photo.link

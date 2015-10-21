@@ -1,0 +1,19 @@
+extends ./mainLayout
+
+block new-photo
+
+  h2 hello
+
+
+form(name='new-photo-form' method='POST' action='/gallery/new')
+  ul
+    label(for='author-name') Author name:
+    input#author-name(placeholder='THIS IS NEW')
+  ul
+    label(for='image-url') Image URL:
+    input#link(placeholder='image url')
+  ul
+    label(for='description') Description:
+    textarea#description(placeholder='description')
+  ul
+    input(type='submit')
