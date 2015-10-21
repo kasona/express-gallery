@@ -16,6 +16,15 @@ p {
 h1 {
   color: #7E797F;
   margin-top: 0px;
+
+  @media #{$small} {
+    padding-right: 0px;
+    text-align: center;
+  }
+
+  @media #{$large} {
+    padding-right: 30px;
+  }
 }
 
 #header {
@@ -23,47 +32,88 @@ h1 {
   border-top: 1px dashed #C7C7C7;
   margin-bottom: 10px;
 }
+
 #welcome {
+  @media #{$small}{
+    display: none;
+  }
+ @media #{$large}{
   width: 40%;
   display: inline-block;
   padding-left: 25px;
   border-left: 1px dashed #C7C7C7;
   font-size: 12px;
   height: 85px;
-  }
+}
+
+}
 
 #architekt {
+  @media #{$small} {
+    width: 100%;
+  }
+
+  @media #{$large} {
   width: 58%;
   display: inline-block;
-  font-size: 24px;
+  font-size: 100%;
   text-align: right;
   margin-bottom: 0px;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.3em
+  }
+
 }
 
 // ============= home-listing =====================
 #container {
-  width: 50%;
-  display:block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 30px;
-  margin-top: 15px;
+  @media #{$small} {
+    width: 100%;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    margin-top: 15px;
+  }
+
+  @media #{$large}{
+    width: 50%;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    margin-top: 15px;
+  }
+
 }
 #top-image {
   padding-bottom: 30px;
+
+  @media #{$small} {
+     border-bottom: 1px dashed #C7C7C7;
+  }
 }
 #bottom-image {
   padding-bottom: 30px;
   padding-top: 30px;
   border-top: 1px dashed #C7C7C7;
   border-bottom: 1px dashed #C7C7C7;
+
+  @media #{$small} {
+    border-bottom: none;
+    border-top: none;
+  }
 }
 
 //background-cover??? from Reddit
 
-// =============== home-detail =====================
+// =============== Home Detail mobile ===============
 
-#test {
-  display:inline-block;
+#photoContainerDetail {
+  @media #{$small}{
+    display:none;
+  }
+
+  @media #{$large}{
+    display: block;
+  }
 }

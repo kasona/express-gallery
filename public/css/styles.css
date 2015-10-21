@@ -1211,51 +1211,98 @@ p {
 h1 {
   color: #7E797F;
   margin-top: 0px; }
+  @media only screen {
+    /* line 16, stdin */
+    h1 {
+      padding-right: 0px;
+      text-align: center; } }
+  @media only screen and (min-width: 64.0625em) {
+    /* line 16, stdin */
+    h1 {
+      padding-right: 30px; } }
 
-/* line 21, stdin */
+/* line 30, stdin */
 #header {
   margin-top: 10px;
   border-top: 1px dashed #C7C7C7;
   margin-bottom: 10px; }
 
-/* line 26, stdin */
-#welcome {
-  width: 40%;
-  display: inline-block;
-  padding-left: 25px;
-  border-left: 1px dashed #C7C7C7;
-  font-size: 12px;
-  height: 85px; }
+@media only screen {
+  /* line 36, stdin */
+  #welcome {
+    display: none; } }
 
-/* line 35, stdin */
-#architekt {
-  width: 58%;
-  display: inline-block;
-  font-size: 24px;
-  text-align: right;
-  margin-bottom: 0px;
-  letter-spacing: 0.3em; }
+@media only screen and (min-width: 64.0625em) {
+  /* line 36, stdin */
+  #welcome {
+    width: 40%;
+    display: inline-block;
+    padding-left: 25px;
+    border-left: 1px dashed #C7C7C7;
+    font-size: 12px;
+    height: 85px; } }
 
-/* line 45, stdin */
-#container {
-  width: 50%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 30px;
-  margin-top: 15px; }
+@media only screen {
+  /* line 51, stdin */
+  #architekt {
+    width: 100%; } }
 
-/* line 53, stdin */
+@media only screen and (min-width: 64.0625em) {
+  /* line 51, stdin */
+  #architekt {
+    width: 58%;
+    display: inline-block;
+    font-size: 100%;
+    text-align: right;
+    margin-bottom: 0px;
+    letter-spacing: 0.3em; } }
+
+@media only screen {
+  /* line 68, stdin */
+  #container {
+    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    margin-top: 15px; } }
+
+@media only screen and (min-width: 64.0625em) {
+  /* line 68, stdin */
+  #container {
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    margin-top: 15px; } }
+
+/* line 88, stdin */
 #top-image {
   padding-bottom: 30px; }
+  @media only screen {
+    /* line 88, stdin */
+    #top-image {
+      border-bottom: 1px dashed #C7C7C7; } }
 
-/* line 56, stdin */
+/* line 95, stdin */
 #bottom-image {
   padding-bottom: 30px;
   padding-top: 30px;
   border-top: 1px dashed #C7C7C7;
   border-bottom: 1px dashed #C7C7C7; }
+  @media only screen {
+    /* line 95, stdin */
+    #bottom-image {
+      border-bottom: none;
+      border-top: none; } }
 
-/* line 67, stdin */
-#test {
-  display: inline-block; }
+@media only screen {
+  /* line 111, stdin */
+  #photoContainerDetail {
+    display: none; } }
+
+@media only screen and (min-width: 64.0625em) {
+  /* line 111, stdin */
+  #photoContainerDetail {
+    display: block; } }
