@@ -45,7 +45,6 @@ app.post('/users', function (req, res) {
   });
 });
 
-
 // Creating a server listening on port 3000
 // listen is express's way of creating a HTTP server
 var server = app.listen(3000, function () {
