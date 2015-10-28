@@ -1,4 +1,7 @@
-// Create a Photo table
+/**
+ * Creating a photo db table
+ */
+
 module.exports = function(sequelize, DataTypes) {
   var Photo = sequelize.define( "photo", {
     url : DataTypes.STRING,
@@ -10,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
     freezeTableName : true
   });
 
-
+  // Hard code some images on the page
   Photo.sync({ force : true }).then(function() {
     Photo.create({
       url : 'https://static.pexels.com/photos/1127/cold-snow-landscape-nature.jpg',

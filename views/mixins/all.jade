@@ -11,7 +11,7 @@ mixin generatePhotos(photos)
       .large-4.columns.side-img
         a(href='/gallery/:id')
         img(src='#{photo.image}')
-        p #{photo.title} #{photo.copyright}
+        p #{photo.title}
 
 //- Home Detail Mixins
 mixin generateMainPhotoInDetail(mainPhoto)
@@ -26,5 +26,4 @@ mixin generatePhotosInDetail(photos)
       .large-4.columns.side-img-detail
         a(href='/gallery/:id')
         img(src='#{photo.image}')
-        p #{photo.title} #{photo.copyright}
-
+        p #{photo.title}

@@ -1,16 +1,23 @@
 extends ./layouts/mainLayout
 
-block new-photo
+include ./mixins/all
 
-form(name='new-photo-form' method='POST' action='/gallery/new')
-  ul
-    label(for='author-name') Author name:
-    input#author-name(placeholder='THIS IS NEW')
-  ul
-    label(for='image-url') Image URL:
-    input#link(placeholder='image url')
-  ul
-    label(for='description') Description:
-    textarea#description(placeholder='description')
-  ul
-    input(type='submit')
+
+block new-photo
+  //- action points to route
+  //- Be sure labels have a name to ref back to routes.post!
+  form( action='/gallery/' method='post' )
+    ul
+      label(for='title') Title:
+      input#title(name='title' placeholder='title')
+    ul
+      label(for='image-url') Image URL:
+      input#url(name='url' placeholder='image url')
+    ul
+      label(for='author-name') Author name:
+      input#author(name='author' placeholder='THIS IS NEW')
+    ul
+      label(for='description') Description:
+      textarea#description(name='description' placeholder='description')
+    ul
+      input(type='submit')

@@ -2,7 +2,7 @@
 var express = require('express');
 var app = express();
 var jade = require('jade');
-var router = require('./router/router');
+// var router = require('./routes/gallery.js');
 var db = require('./models');
 var User = db.User;
 var Photo = db.photo;
@@ -23,25 +23,17 @@ app.use(express.static('./public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : true }));
 
-// ============ Routes ======================
-app.use('/', router);
+// ============ Routes ================
+app.use('/gallery', require('./routes/gallery.js'));
 
 app.get('/', function(req, res) {
   Photo.findAll()
   .then(function (photos) {
     res.render('home-listing', {
       title : 'Express Gallery',
+      mainPhoto : photos.pop(),
       photos : photos
     });
-  });
-});
-
-app.post('/', function (req, res) {
-  Photo.create( {
-    url : req.body.url,
-    author : req.body.author,
-    description : req.body.description,
-    title : req.body.description
   });
 });
 
