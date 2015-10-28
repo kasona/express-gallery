@@ -1,15 +1,11 @@
 // module pattern
 var express = require('express');
-
 var app = express();
-
 var jade = require('jade');
-
 var router = require('./router/router');
-
 var db = require('./models');
 var User = db.User;
-
+var Photo = db.photo;
 var bodyParser = require('body-parser');
 
 // ============== Adding Template Engine ============
@@ -30,18 +26,22 @@ app.use(bodyParser.urlencoded({ extended : true }));
 // ============ Routes ======================
 app.use('/', router);
 
-
-app.get('/users', function(req, res) {
-  User.findAll()
-  .then(function (users) {
-    res.json(users);
+app.get('/', function(req, res) {
+  Photo.findAll()
+  .then(function (photos) {
+    res.render('home-listing', {
+      title : 'Express Gallery',
+      photos : photos
+    });
   });
 });
 
-app.post('/users', function (req, res) {
-  User.create({ username: req.body.username })
-  .then(function (user) {
-    res.json(user);
+app.post('/', function (req, res) {
+  Photo.create( {
+    url : req.body.url,
+    author : req.body.author,
+    description : req.body.description,
+    title : req.body.description
   });
 });
 
@@ -50,7 +50,7 @@ app.post('/users', function (req, res) {
 var server = app.listen(3000, function () {
   var host = server.address().address;
   var port = server.address().port;
-  db.sequelize.sync();
+  // db.sequelize.sync();
 
   console.log('Example app listening at http://%s:%s', host, port);
 });
