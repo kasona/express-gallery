@@ -11,6 +11,7 @@ var localStrategy = require('passport-local').Strategy;
 
 /**
  * Make sure users are logged in for each page
+ * if not, redirect them back to login
  */
 
 function ensureAuthenticated(req, res, next) {

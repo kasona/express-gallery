@@ -2,17 +2,12 @@ extends ./layouts/mainLayout
 
 block body
   form( action='/gallery/' method='put' )
-    ul
       label(for='title') Title:
-      input#title(name='title' placeholder='title')
-    ul
+        input#title(name='title' placeholder='title')
       label(for='image-url') Image URL:
-      input#url(name='url' placeholder='image url')
-    ul
+        input#url(name='url' placeholder='image url')
       label(for='author-name') Author name:
-      input#author(name='author' placeholder='THIS IS EDIT')
-    ul
+        input#author(name='author' placeholder='THIS IS EDIT')
       label(for='description') Description:
-      textarea#description(name='description' placeholder='description')
-    ul
+        textarea#description(name='description' placeholder='description')
       input(type='submit')

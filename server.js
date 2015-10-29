@@ -13,6 +13,7 @@ var session = require('express-session');
 var flash = require('connect-flash');
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
+var methodOverride = require('method-override');
 
 /**
  * Adding Template Engine
@@ -21,46 +22,16 @@ var localStrategy = require('passport-local').Strategy;
 
 app.set('view engine', 'jade');
 
-
 /**
- * Tell Express where the templates are
+ * Keep user logged in
  */
-
-app.set('views', __dirname + '/views');
-
-/**
- * Hi Express! Look in here and run these files!
- */
-
-app.use(express.static('./public'));
-
-/**
- * Parser
- */
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended : true }));
-
-/**
- * default Routes
- */
-
-app.use('/gallery', require('./routes/gallery.js'));
-
-app.get('/', ensureAuthenticated, function(req, res) {
-  Photo.findAll()
-  .then(function (photos) {
-    res.render('home-listing', {
-      title : 'Express Gallery',
-      mainPhoto : photos.pop(),
-      photos : photos
-    });
-  });
-});
-
-/**
- * Authentication
- */
+app.use(methodOverride(function(req, res) {
+  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+    var method = req.body._method;
+    delete req.body._method;
+    return method;
+  }
+}));
 
 app.use(session(
 {
@@ -78,7 +49,8 @@ app.use(passport.session());
 passport.serializeUser(function(user, done) {
   done(null, JSON.stringify(user));
 });
-passport.deserializeUser(function(user, done) {
+
+passport.deserializeUser(function(obj, done) {
   done(null, JSON.parse(obj));
 });
 
@@ -134,7 +106,52 @@ app.post('/users', ensureAuthenticated, function (req, res) {
     });
 });
 
+/**
+ * Tell Express where the templates are
+ */
 
+app.set('views', __dirname + '/views');
+
+/**
+ * Hi Express! Look in here and run these files!
+ */
+
+app.use(express.static('./public'));
+
+/**
+ * Parser
+ */
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended : true }));
+
+/**
+ * default Routes
+
+ */
+
+app.use('/gallery', require('./routes/gallery.js'));
+
+
+/**
+ * Authentication
+ */
+
+
+/**
+ * Order Matters!!!!
+ */
+
+app.get('/', ensureAuthenticated, function(req, res) {
+  Photo.findAll()
+  .then(function (photos) {
+    res.render('home-listing', {
+      title : 'Express Gallery',
+      mainPhoto : photos.pop(),
+      photos : photos
+    });
+  });
+});
 
 /**
  * Creating a server listening on port 3000
@@ -144,6 +161,22 @@ app.post('/users', ensureAuthenticated, function (req, res) {
 var server = app.listen(3000, function () {
   var host = server.address().address;
   var port = server.address().port;
+  db.sequelize.sync();
 
   console.log('Example app listening at http://%s:%s', host, port);
 });
+
+
+var User = {
+  findOne : function(opts, cb) {
+    var user = {
+      id : 1,
+      username : opts.username,
+      password : "bagel",
+      validPassword : function(password) {
+        return (password === "bagel");
+      }
+    };
+    cb(null, user);
+  }
+};

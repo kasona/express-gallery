@@ -1,3 +1,7 @@
+/**
+ * Generic login, with one user to test
+ */
+
 module.exports = function(sequelize, DataTypes) {
 
   var User = {
@@ -5,9 +9,9 @@ module.exports = function(sequelize, DataTypes) {
       var user = {
         id : 1,
         username : opts.username,
-        password : "my secret password",
+        password : "bagel",
         validPassword : function(password) {
-          return (password === "my secret password");
+          return (password === "bagel");
         }
       };
       cb(null, user);
@@ -15,3 +19,22 @@ module.exports = function(sequelize, DataTypes) {
   };
   return User;
 };
+
+
+/**
+ * Creating a User table in the db
+ */
+
+// module.exports = function(sequelize, DataTypes) {
+//   var User = sequelize.define('User', {
+//     username : DataTypes.STRING
+//   }, {
+//     classMethods : {
+//       associate : function(models) {
+//         User.hasMany(models.Photos);
+//       }
+//     }
+//   });
+
+//   return User;
+// };
