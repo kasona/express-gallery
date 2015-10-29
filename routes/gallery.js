@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('./../models');
 var Photo = db.photo;
-
+var allPhotos = require('../allPhotos');
 /**
  * Home Page
  */
@@ -45,16 +45,26 @@ router.get('/new', function (req, res) {
 
 /**
  * Gallery Photo Id Route +
- * if you have multiple http mehtods for one route
- * wanna use this?
+ *
  */
 
 router.route('/:id')
   .get(function(req, res) {
-    var allPhotos = require('./../allPhotos')();
-    res.render('home-detail', {
-      'mainPhoto' : allPhotos.pop(),
-      'photos' : allPhotos
+    Photo.findOne({
+      where : {
+        id : req.params.id
+      }
+    })
+    .then(function(single) {
+      console.log(single);
+      res.render('home-detail', {
+        'mainPhoto' : {
+          image : single.url,
+          title : single.title
+
+        },
+        'photos' : allPhotos()
+      });
     });
   })
   .delete(function(req, res) {

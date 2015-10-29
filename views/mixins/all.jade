@@ -18,6 +18,7 @@ mixin generateMainPhotoInDetail(mainPhoto)
   #containerDetail
     .large-8.columns.main-img
       img(src='#{mainPhoto.image}')
+      p #{mainPhoto.title}
       a(href='/gallery/:id') www.pexels.com
 
 mixin generatePhotosInDetail(photos)
