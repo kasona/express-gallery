@@ -38,31 +38,43 @@ router.post('/', function (req, res) {
  */
 
 router.get('/new', function (req, res) {
-  res.render('new-photo', {
-    // submitButton : 'Submit Photo' // submit information into the database
-  });
+  res.render('new-photo');
 });
 
 /**
  * Gallery Photo Id Route +
  * if you have multiple http mehtods for one route
  * findById makes the main photo
+ * need to make another .then that findAll making multiple
  */
 
-router.get('/:id', function(req, res) {
-  Photo.findById(req.param.id)
-    .then(function(single) {
-      res.render('home-detail', {
-        mainPhoto : photos.pop(),
+router.get('/:id')
+  .get(function(req, res){
+    Photo.findOne({
+      where : {
         id : req.params.id
+      }
+    })
+    .then(function (single) {
+      Photo.findAll({
+        limit : 3,
+        // shows the latestes created pictures
+        order : '"createdAt" DESC',
+        where : {
+          id : {
+            $ne : req.params.id
+          }
+        }
       })
-    })
-    .then(function(single, multiple) {
-
-    })
-});
-
-
+      .then(function(photos) {
+        if(req.params.id !== null) {
+          res.render('home-detail', {
+            photos : photo
+          });
+        }
+      });
+    });
+  }
 
   // .get(function(req, res) {
   //   var allPhotos = require('./../allPhotos')();
