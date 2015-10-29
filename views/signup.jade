@@ -1,0 +1,12 @@
+extends ./layouts/mainLayout
+
+block body
+    form( action='/galery/' method='post' )
+    ul
+      label(for='username') Username
+      input#username(name='username' placeholder='username')
+    ul
+      label(for='password') Password:
+      input#password(name='password' placeholder='password')
+    ul
+      input(type='submit' value="login")

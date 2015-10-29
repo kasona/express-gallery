@@ -1,19 +1,18 @@
 extends ./layouts/mainLayout
 
-block edit-photo
-  form(name='edit-photo-form' method='PUT' action='/users')
+block body
+  form( action='/gallery/' method='put' )
     ul
-      label(for='author-name') Author name:
-      input#author-name(placeholder='THIS IS EDIT')
+      label(for='title') Title:
+      input#title(name='title' placeholder='title')
     ul
       label(for='image-url') Image URL:
-      input#link(placeholder='image url')
+      input#url(name='url' placeholder='image url')
     ul
-    label(for='description') Description:
-    textarea#description(placeholder='description')
-  ul
-    input(type='submit' onclick="move()" value='#{editButton}')
-    script.
-      function move() {
-      window.location.href = '/'
-      }
+      label(for='author-name') Author name:
+      input#author(name='author' placeholder='THIS IS EDIT')
+    ul
+      label(for='description') Description:
+      textarea#description(name='description' placeholder='description')
+    ul
+      input(type='submit')

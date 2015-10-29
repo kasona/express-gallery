@@ -3,7 +3,8 @@ mixin generateMainPhoto(mainPhoto)
   #container
       .large-12.columns#top-image
       img(src='#{mainPhoto.image}')
-      a(href='/gallery/:id') www.pexels.com
+      p #{mainPhoto.title}
+      p #{mainPhoto.description}
 
 //- photo is like i
 mixin generatePhotos(photos)
@@ -19,7 +20,7 @@ mixin generateMainPhotoInDetail(mainPhoto)
     .large-8.columns.main-img
       img(src='#{mainPhoto.image}')
       p #{mainPhoto.title}
-      a(href='/gallery/:id') www.pexels.com
+      p #{mainPhoto.description}
 
 mixin generatePhotosInDetail(photos)
   #photoContainerDetail

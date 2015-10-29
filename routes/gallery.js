@@ -3,11 +3,12 @@ var router = express.Router();
 var db = require('./../models');
 var Photo = db.photo;
 var allPhotos = require('../allPhotos');
+
 /**
  * Home Page
  */
 
-router.get('/', function (req, res) {
+router.get('/', ensureAuthenticated, function (req, res) {
   var allPhotos = require('./../allPhotos')();
   res.render('home-listing', {
     'mainPhoto' : allPhotos.pop(),
@@ -20,7 +21,7 @@ router.get('/', function (req, res) {
  * Post to the gallery, redirect user back to main page
  */
 
-router.post('/', function (req, res) {
+router.post('/', ensureAuthenticated, function (req, res) {
   Photo.create( {
       url : req.body.url,
       title : req.body.description,
@@ -78,9 +79,21 @@ router.route('/:id')
  * Edit Gallery Photo by id
  */
 
-router.get('/:id/edit', function (req, res) {
-  res.render('edit-photo', {
-    editButtonText : 'Edit Photo'
+// router.get('/:id/edit', function (req, res) {
+//   res.render('edit-photo', {
+//     editButtonText : 'Edit Photo'
+//   });
+// });
+
+router.put('/:id/edit', function (req, res) {
+  Photo.create( {
+      url : req.body.url,
+      title : req.body.description,
+      author : req.body.author,
+      description : req.body.description
+    })
+  .then(function(newPhoto) {
+    res.redirect('/gallery/' + newPhoto.id);
   });
 });
 
