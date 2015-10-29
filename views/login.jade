@@ -1,12 +1,12 @@
 extends ./layouts/mainLayout
 
 block body
-    form( action='/galery/' method='get' )
+    form( name='login' action='/login/' method='POST' )
     ul
       label(for='username') Username
-      input#username(name='username' placeholder='username')
+      input#username(name='username')
     ul
       label(for='password') Password:
-      input#password(name='password' placeholder='password')
+      input#password(name='password')
     ul
       input(type='submit' value="login")

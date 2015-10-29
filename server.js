@@ -13,19 +13,6 @@ var session = require('express-session');
 var flash = require('connect-flash');
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
-var methodOverride = require('method-override');
-
-app.use(methodOverride(function(req, res) {
-  if (req.body && type of req.body === 'object' && '_method' in req.body) {
-    var method = req.body._method;
-    delete req.body._method;
-    return method;
-  }
-}));
-
-app.use(flash());
-app.use(passport.initialize());
-app.use(passport.session());
 
 /**
  * Adding Template Engine
@@ -34,13 +21,6 @@ app.use(passport.session());
 
 app.set('view engine', 'jade');
 
-app.use(session(
-{
-  secret : 'keyboard cat',
-  resave : false,
-  saveUninitialized : true
-}
-));
 
 /**
  * Tell Express where the templates are
@@ -61,14 +41,13 @@ app.use(express.static('./public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : true }));
 
-
 /**
- * Routes
+ * default Routes
  */
 
 app.use('/gallery', require('./routes/gallery.js'));
 
-app.get('/', function(req, res) {
+app.get('/', ensureAuthenticated, function(req, res) {
   Photo.findAll()
   .then(function (photos) {
     res.render('home-listing', {
@@ -78,6 +57,84 @@ app.get('/', function(req, res) {
     });
   });
 });
+
+/**
+ * Authentication
+ */
+
+app.use(session(
+{
+  secret : 'keyboard cat',
+  resave : false,
+  saveUninitialized : true
+}
+));
+
+app.use(bodyParser.urlencoded({ extended : true }));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function(user, done) {
+  done(null, JSON.stringify(user));
+});
+passport.deserializeUser(function(user, done) {
+  done(null, JSON.parse(obj));
+});
+
+passport.use(new localStrategy(
+  function(username, password, done) {
+    User.findOne({ username : username }, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message : 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message : 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
+
+app. post('/login',
+  passport.authenticate('local', { successRedirect : '/',
+                                    failureRedirect : '/login',
+                                    failureFlash : true })
+);
+
+app.get('/login', function(req, res) {
+  res.render('login', { user : req.user, messages : req.flash('error') });
+});
+
+app.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/');
+});
+
+app.get('/secret', ensureAuthenticated, function(req, res) {
+    res.send('secret');
+  });
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/login');
+}
+app.get('/users', ensureAuthenticated, function(req, res) {
+  User.findAll()
+    .then(function (users) {
+      res.json(users);
+    });
+});
+
+app.post('/users', ensureAuthenticated, function (req, res) {
+  User.create({ username : req.body.username })
+    .then(function (user) {
+      res.json(user);
+    });
+});
+
+
 
 /**
  * Creating a server listening on port 3000
