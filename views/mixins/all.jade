@@ -20,7 +20,6 @@ mixin generateMainPhotoInDetail(mainPhoto)
     .large-8.columns.main-img
       img(src='#{mainPhoto.image}')
       p #{mainPhoto.title}
-      p #{mainPhoto.description}
 
 mixin generatePhotosInDetail(photos)
   #photoContainerDetail
@@ -29,3 +28,4 @@ mixin generatePhotosInDetail(photos)
         a(href='/gallery/:id')
         img(src='#{photo.image}')
         p #{photo.title}
+

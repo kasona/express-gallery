@@ -1,9 +1,13 @@
 extends ./layouts/mainLayout
 
 block body
-    form( name='login' action='/login' method='POST' )
-      label(for='username') Username
-        input#username(type="text" name='username' )
-      label(for='password') Password:
-        input#password(type="text" name='password')
-      input(type='submit' value="login")
+  form( name='login' action='/login' method='POST' )
+    .row
+      .large-12.columns
+        label(for='username') Username:
+          input#username(type="text" name='username' )
+      .large-12.columns
+        label(for='password') Password:
+          input#password(type="text" name='password')
+      .large-12.columns
+        input(type='submit' value="login")

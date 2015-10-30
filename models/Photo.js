@@ -3,11 +3,21 @@
  */
 
 module.exports = function(sequelize, DataTypes) {
-  var Photo = sequelize.define( "photo", {
+  var Photo = sequelize.define( 'photo', {
     url : DataTypes.STRING,
     title : DataTypes.TEXT,
     author : DataTypes.TEXT,
     description : DataTypes.TEXT
+  }, {
+    // Creating a classMethod to find the count of the photo array
+    classMethods : {
+      randomTest : function() {
+        this.count()
+        .then(function(count) {
+          console.log('photos', count);
+        });
+      }
+    }
   }, {
     // Disable modification of tablenames. makes table into photo not photos
     freezeTableName : true

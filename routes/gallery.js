@@ -64,31 +64,50 @@ router.get('/new', ensureAuthenticated, function (req, res) {
  *
  */
 
+
 router.route('/:id', ensureAuthenticated)
   .get(function(req, res) {
-    Photo.findOne({
+    Photo.randomTest(Photo.count());
+    Photo.count().then(function(count) {
+      console.log(count, 'hii');
+    });
+
+    // Find all photos except for the id.
+    Photo.findAll({
       where : {
-        id : req.params.id
+        id : {
+          $ne : req.params.id
+        }
       }
     })
-    .then(function(single) {
-      console.log(single);
-      res.render('home-detail', {
-        'mainPhoto' : {
-          image : single.url,
-          title : single.title
-
-        },
-        'photos' : allPhotos()
+      .then(function (allPhotos) {
+        // Assign current photo id to a variable
+        var currentPhotoId = req.params.id;
+        // pick out the main photo
+        var currentPhoto = allPhotos.reduce(function(prev, current) {
+          if ( current.id === currentPhotoId) {
+            return current;
+          }
+          // if prev found it, keep going
+          if ( prev !== null) {
+            return prev;
+          } else {
+            return null;
+          }
+        }, null);
+        // res.render('home-detail', {
+        //   'mainPhoto' : currentPhoto,
+        //   'photo' :
+        // });
       });
-    });
-  })
-  .delete(function(req, res) {
-    res.send('be able to delete this gallery photo, identified by the :id param');
-  })
-  .put(function(req, res) {
-    res.send('be able to edit this gallery photo, identified by the :id param');
   });
+
+  // .delete(function(req, res) {
+  //   res.send('be able to delete this gallery photo, identified by the :id param');
+  // })
+  // .put(function(req, res) {
+  //   res.send('be able to edit this gallery photo, identified by the :id param');
+  // });
 
 /**
  * Edit Gallery Photo by id

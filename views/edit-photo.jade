@@ -2,12 +2,18 @@ extends ./layouts/mainLayout
 
 block body
   form( action='/gallery/' method='put' )
+    .row
+      .large-12.columns
       label(for='title') Title:
         input#title(name='title' placeholder='title')
+      .large-12.columns
       label(for='image-url') Image URL:
         input#url(name='url' placeholder='image url')
+      .large-12.columns
       label(for='author-name') Author name:
         input#author(name='author' placeholder='THIS IS EDIT')
+      .large-12.columns
       label(for='description') Description:
         textarea#description(name='description' placeholder='description')
+      .large-12.columns
       input(type='submit')
